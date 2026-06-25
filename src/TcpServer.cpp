@@ -126,22 +126,34 @@ void TcpServer::acceptClients()
 void TcpServer::handleClients(int clientSocket)
 {
     char buffer[1024];
-
-    ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
-
-    if (bytesReceived == -1)
+    while (true)
     {
-        std::cerr << "Falied to receive data.\n";
-        return;
+        ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
+
+        if (bytesReceived == -1)
+        {
+            std::cerr << "Falied to receive data.\n";
+            return;
+        }
+
+        if (bytesReceived == 0)
+        {
+            std::cout << "Client disconnected.\n";
+            return;
+        }
+
+        std::string message(buffer, bytesReceived);
+
+        std::cout << "Received: " << message << '\n';
+
+        ssize_t bytesSent = send(clientSocket, message.c_str(), message.size(), 0);
+
+        if (bytesSent == -1)
+        {
+            std::cerr << "Failed to send data.\n";
+            return;
+        }
+
+        std::cout << "Sent: " << message << '\n';
     }
-
-    if (bytesReceived == 0)
-    {
-        std::cout << "Client disconnected.\n";
-        return;
-    }
-
-    std::string message(buffer, bytesReceived);
-
-    std::cout << "Received: " << message << '\n';
 }

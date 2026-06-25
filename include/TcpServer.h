@@ -6,9 +6,9 @@ public:
     TcpServer();
     ~TcpServer();
     bool start();
+    
+    private:
     bool enableReuseAddress();
-
-private:
     bool createSocket();
     bool bindSocket();
     bool startListening();
@@ -18,4 +18,3 @@ private:
 private:
     int serverSocket;
 };
-g
