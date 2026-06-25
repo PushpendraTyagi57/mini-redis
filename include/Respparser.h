@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-class Respparser
+class RespParser
 {
 public:
     std::vector<std::string> parse(const std::string& request);

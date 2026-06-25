@@ -1,4 +1,6 @@
-#include "TcpServer.h"
+#include "Tcpserver.h"
+#include "Respparser.h"
+#include "Respserializer.h"
 
 #include <iostream>
 
@@ -144,16 +146,35 @@ void TcpServer::handleClients(int clientSocket)
 
         std::string message(buffer, bytesReceived);
 
-        std::cout << "Received: " << message << '\n';
+        RespParser parser;
 
-        ssize_t bytesSent = send(clientSocket, message.c_str(), message.size(), 0);
-
-        if (bytesSent == -1)
+        try
         {
-            std::cerr << "Failed to send data.\n";
-            return;
+            auto command = parser.parse(message);
+
+            if (!command.empty() && command[0] == "PING")
+            {
+                std::string response = RespSerializer::simpleString("PONG");
+
+                send(clientSocket, response.c_str(), response.size(), 0);
+            }
+        }
+        
+        catch (const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
         }
 
-        std::cout << "Sent: " << message << '\n';
+        std::cout << "Received: " << message << '\n';
+
+        // ssize_t bytesSent = send(clientSocket, message.c_str(), message.size(), 0);
+
+        // if (bytesSent == -1)
+        // {
+        //     std::cerr << "Failed to send data.\n";
+        //     return;
+        // }
+
+        // std::cout << "Sent: " << message << '\n';
     }
 }

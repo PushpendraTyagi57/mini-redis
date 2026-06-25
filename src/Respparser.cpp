@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-std::vector<std::string> Respparser::parse(const std::string& request)
+std::vector<std::string> RespParser::parse(const std::string& request)
 {
     size_t pos = 0;
     if (request.empty() || request[pos] != '*')
@@ -25,7 +25,7 @@ std::vector<std::string> Respparser::parse(const std::string& request)
     return result;
 }
 
-int Respparser::readInteger(const std::string& request, size_t& pos)
+int RespParser::readInteger(const std::string& request, size_t& pos)
 {
     int value = 0;
 
@@ -45,7 +45,7 @@ int Respparser::readInteger(const std::string& request, size_t& pos)
     return value;
 }
 
-std::string Respparser::readBulkString(const std::string& request, size_t& pos)
+std::string RespParser::readBulkString(const std::string& request, size_t& pos)
 {
     if (pos >= request.size() || request[pos] != '$')
     {
@@ -65,12 +65,12 @@ std::string Respparser::readBulkString(const std::string& request, size_t& pos)
 
     pos += length;
 
-    expect CRLF(request, pos);
+    expectCRLF(request, pos);
 
     return value;
 }
 
-void Respparser::expectCRLF(const std::string& request, size_t& pos)
+void RespParser::expectCRLF(const std::string& request, size_t& pos)
 {
     if (pos + 1 >= request.size())
     {

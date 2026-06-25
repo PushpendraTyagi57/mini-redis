@@ -10,4 +10,6 @@ include_directories(include)
 add_executable(MiniRedis
     src/main.cpp
     src/TcpServer.cpp
+    src/Respparser.cpp
+    src/Respserializer.cpp
 )
