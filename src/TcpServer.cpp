@@ -24,6 +24,9 @@ bool TcpServer::start()
     if (!createSocket())
         return false;
 
+    if (!enableReuseAddress())
+        return false;
+
     if (!bindSocket())
         return false;
 
@@ -46,6 +49,20 @@ bool TcpServer::createSocket()
     }
 
     std::cout << "Socket created.\n";
+
+    return true;
+}
+
+bool TcpServer::enableReuseAddress()
+{
+    int option = 1;
+    if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option)) == -1)
+    {
+        std::cerr << "Failed to enable SO_REUSEADDR.\n";
+        return false;
+    }
+
+    std::cout << "SO_REUSEADDR enabled.\n";
 
     return true;
 }
@@ -100,6 +117,31 @@ void TcpServer::acceptClients()
 
         std::cout << "Client connected.\n";
 
+        handleClients(clientSocket);
+
         close(clientSocket);
     }
+}
+
+void TcpServer::handleClients(int clientSocket)
+{
+    char buffer[1024];
+
+    ssize_t bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
+
+    if (bytesReceived == -1)
+    {
+        std::cerr << "Falied to receive data.\n";
+        return;
+    }
+
+    if (bytesReceived == 0)
+    {
+        std::cout << "Client disconnected.\n";
+        return;
+    }
+
+    std::string message(buffer, bytesReceived);
+
+    std::cout << "Received: " << message << '\n';
 }
