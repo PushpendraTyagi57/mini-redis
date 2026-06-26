@@ -14,9 +14,17 @@ public:
 
     void setString(const std::string& key, const std::string& value);
 
-    std::optional<std::string> getString(const std::string& key) const;
+    std::optional<std::string> getString(const std::string& key);
 
     bool deleteKey(const std::string& key);
+
+    bool expireKey(const std::string& key, std::chrono::seconds ttl);
+
+    std::optional<std::chrono::seconds> getTtl(const std::string& key) const;
+
+    bool isExpired(const std::string& key) const;
+
+    void removeExpired();
 
 private:
     std::unordered_map<std::string, std::string> stringStore;

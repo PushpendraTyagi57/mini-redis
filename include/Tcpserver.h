@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Store.h"
+
 class TcpServer
 {
 public:
@@ -17,4 +19,5 @@ public:
 
 private:
     int serverSocket;
+    Store store;
 };

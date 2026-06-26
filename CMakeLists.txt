@@ -20,4 +20,6 @@ add_executable(MiniRedis
     src/Commands/SetCommand.cpp
     src/Commands/GetCommand.cpp
     src/Commands/DelCommand.cpp
+    src/Commands/ExpireCommand.cpp
+    src/Commands/TtlCommand.cpp
 )

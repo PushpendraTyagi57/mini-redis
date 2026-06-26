@@ -129,7 +129,6 @@ void TcpServer::acceptClients()
 void TcpServer::handleClients(int clientSocket)
 {
     RespParser parser;
-    Store store;
     CommandDispatcher dispatcher(store);
     
     char buffer[1024];

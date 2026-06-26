@@ -6,6 +6,8 @@
 #include "Commands/SetCommand.h"
 #include "Commands/GetCommand.h"
 #include "Commands/DelCommand.h"
+#include "Commands/ExpireCommand.h"
+#include "Commands/TtlCommand.h"
 
 #include "Respserializer.h"
 
@@ -21,6 +23,8 @@ CommandDispatcher::CommandDispatcher(Store& store)
     handlers["SET"] = std::make_unique<SetCommand>(store);
     handlers["GET"] = std::make_unique<GetCommand>(store);
     handlers["DEL"] = std::make_unique<DelCommand>(store);
+    handlers["EXPIRE"] = std::make_unique<ExpireCommand>(store);
+    handlers["TTL"] = std::make_unique<TtlCommand>(store);
 }
 
 std::string CommandDispatcher::dispatch(const std::vector<std::string>& command)
