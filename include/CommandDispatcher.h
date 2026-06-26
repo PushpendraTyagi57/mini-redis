@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Store.h"
+
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -10,7 +12,7 @@
 class CommandDispatcher
 {
 public:
-    CommandDispatcher();
+    explicit CommandDispatcher(Store& store);
 
     std::string dispatch(const std::vector<std::string>& command);
 
