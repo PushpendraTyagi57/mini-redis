@@ -1,0 +1,41 @@
+#include "CommandDispatcher.h"
+
+#include "Commands/PingCommand.h"
+#include "Commands/EchoCommand.h"
+#include "Commands/CommandCommand.h"
+
+#include "Respserializer.h"
+
+#include <algorithm>
+#include <cctype>
+
+CommandDispatcher::CommandDispatcher()
+{
+    handlers["PING"] = std::make_unique<PingCommand>();
+    handlers["ECHO"] = std::make_unique<EchoCommand>();
+    handlers["COMMAND"] = std::make_unique<CommandCommand>();
+}
+
+std::string CommandDispatcher::dispatch(const std::vector<std::string>& command)
+{
+    if (command.empty())
+    {
+        return RespSerializer::error("ERR empty command");
+    }
+
+    std::string commandName = command[0];
+
+    std::transform(commandName.begin(), commandName.end(), commandName.begin(), [](unsigned char c)
+    {
+        return std::toupper(c);
+    });
+
+    auto it = handlers.find(commandName);
+
+    if (it == handlers.end())
+    {
+        return RespSerializer::error("ERR unknown command");
+    }
+
+    return it->second->execute(command);
+}

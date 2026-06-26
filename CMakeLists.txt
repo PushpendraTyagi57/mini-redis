@@ -9,7 +9,11 @@ include_directories(include)
 
 add_executable(MiniRedis
     src/main.cpp
-    src/TcpServer.cpp
+    src/Tcpserver.cpp
     src/Respparser.cpp
     src/Respserializer.cpp
+    src/CommandDispatcher.cpp
+    src/Commands/CommandCommand.cpp
+    src/Commands/EchoCommand.cpp
+    src/Commands/PingCommand.cpp
 )
