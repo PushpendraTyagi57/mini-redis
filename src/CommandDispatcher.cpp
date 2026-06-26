@@ -8,6 +8,7 @@
 #include "Commands/DelCommand.h"
 #include "Commands/ExpireCommand.h"
 #include "Commands/TtlCommand.h"
+#include "Commands/SetexCommand.h"
 
 #include "Respserializer.h"
 
@@ -25,6 +26,7 @@ CommandDispatcher::CommandDispatcher(Store& store)
     handlers["DEL"] = std::make_unique<DelCommand>(store);
     handlers["EXPIRE"] = std::make_unique<ExpireCommand>(store);
     handlers["TTL"] = std::make_unique<TtlCommand>(store);
+    handlers["SETEX"] = std::make_unique<SetexCommand>(store);
 }
 
 std::string CommandDispatcher::dispatch(const std::vector<std::string>& command)

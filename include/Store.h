@@ -26,6 +26,8 @@ public:
 
     void removeExpired();
 
+    void setex(const std::string& key, std::chrono::seconds ttl, const std::string& value);
+
 private:
     std::unordered_map<std::string, std::string> stringStore;
 

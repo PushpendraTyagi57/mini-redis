@@ -1,7 +1,6 @@
 #include "Store.h"
 
-void Store::setString(const std::string& key,
-                const std::string& value)
+void Store::setString(const std::string& key, const std::string& value)
 {
     stringStore[key] = value;
 }
@@ -106,4 +105,10 @@ void Store::removeExpired()
             ++it;
         }
     }
+}
+
+void Store::setex(const std::string& key, std::chrono::seconds ttl, const std::string& value)
+{
+    setString(key, value);
+    expireKey(key, ttl);
 }
