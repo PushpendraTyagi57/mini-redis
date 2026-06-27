@@ -1,8 +1,7 @@
-#include "Commands/SetCommand.h"
+#include "Commands/StringCommands/SetCommand.h"
 #include "Respserializer.h"
 
-SetCommand::SetCommand(Store& store)
-    : store(store)
+SetCommand::SetCommand(Store& store) : store(store)
 {
 }
 

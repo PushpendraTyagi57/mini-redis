@@ -6,12 +6,14 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 class Store
 {
 public:
     Store() = default;
 
+    //-- String operations
     void setString(const std::string& key, const std::string& value);
 
     std::optional<std::string> getString(const std::string& key);
@@ -27,6 +29,17 @@ public:
     void removeExpired();
 
     void setex(const std::string& key, std::chrono::seconds ttl, const std::string& value);
+
+    //-- List operations
+    void lpush(const std::string& key, const std::string& value);
+    void rpush(const std::string& key, const std::string& value);
+
+    std::optional<std::string> lpop(const std::string& key);
+    std::optional<std::string> rpop(const std::string& key);
+
+    ssize_t llen(const std::string& key) const;
+
+    std::vector<std::string> lrange(const std::string& key, ssize_t start, ssize_t stop) const;
 
 private:
     std::unordered_map<std::string, std::string> stringStore;

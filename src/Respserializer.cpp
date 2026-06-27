@@ -29,3 +29,13 @@ std::string RespSerializer::emptyArray()
 {
     return "*0\r\n";
 }
+
+std::string RespSerializer::array(const std::vector<std::string>& elements)
+{
+    std::string result = "*" + std::to_string(elements.size()) + "\r\n";
+    for (const auto& element : elements)
+    {
+        result += bulkString(element);
+    }
+    return result;
+}

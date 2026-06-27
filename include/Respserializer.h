@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class RespSerializer
 {
@@ -11,4 +12,5 @@ public:
     static std::string error(const std::string& message);
     static std::string nullBulkString();
     static std::string emptyArray();
+    static std::string array(const std::vector<std::string>& elements);
 };

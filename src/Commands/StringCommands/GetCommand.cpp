@@ -1,4 +1,4 @@
-#include "Commands/GetCommand.h"
+#include "Commands/StringCommands/GetCommand.h"
 #include "Respserializer.h"
 
 GetCommand::GetCommand(Store& store)

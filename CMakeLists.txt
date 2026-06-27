@@ -23,4 +23,10 @@ add_executable(MiniRedis
     src/Commands/StringCommands/ExpireCommand.cpp
     src/Commands/StringCommands/TtlCommand.cpp
     src/Commands/StringCommands/SetexCommand.cpp
+    src/Commands/ListCommands/LPushCommand.cpp
+    src/Commands/ListCommands/RPushCommand.cpp
+    src/Commands/ListCommands/LPopCommand.cpp
+    src/Commands/ListCommands/RPopCommand.cpp
+    src/Commands/ListCommands/LLenCommand.cpp
+    src/Commands/ListCommands/LRangeCommand.cpp
 )

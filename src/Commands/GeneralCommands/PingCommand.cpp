@@ -1,4 +1,4 @@
-#include "Commands/PingCommand.h"
+#include "Commands/GeneralCommands/PingCommand.h"
 #include "Respserializer.h"
 
 std::string PingCommand::execute(const std::vector<std::string>& command)

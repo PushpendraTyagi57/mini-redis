@@ -1,4 +1,4 @@
-#include "Commands/SetexCommand.h"
+#include "Commands/StringCommands/SetexCommand.h"
 
 #include "Respserializer.h"
 

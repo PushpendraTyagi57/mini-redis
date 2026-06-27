@@ -1,4 +1,4 @@
-#include "Commands/EchoCommand.h"
+#include "Commands/GeneralCommands/EchoCommand.h"
 #include "Respserializer.h"
 
 std::string EchoCommand::execute(const std::vector<std::string>& command)

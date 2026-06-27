@@ -1,4 +1,4 @@
-#include "Commands/ExpireCommand.h"
+#include "Commands/StringCommands/ExpireCommand.h"
 
 #include "Respserializer.h"
 

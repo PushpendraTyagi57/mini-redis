@@ -1,4 +1,4 @@
-#include "Commands/DelCommand.h"
+#include "Commands/StringCommands/DelCommand.h"
 #include "Respserializer.h"
 
 DelCommand::DelCommand(Store& store)
