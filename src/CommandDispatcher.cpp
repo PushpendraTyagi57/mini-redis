@@ -1,14 +1,14 @@
 #include "CommandDispatcher.h"
 
-#include "Commands/PingCommand.h"
-#include "Commands/EchoCommand.h"
-#include "Commands/CommandCommand.h"
-#include "Commands/SetCommand.h"
-#include "Commands/GetCommand.h"
-#include "Commands/DelCommand.h"
-#include "Commands/ExpireCommand.h"
-#include "Commands/TtlCommand.h"
-#include "Commands/SetexCommand.h"
+#include "Commands/GeneralCommands/PingCommand.h"
+#include "Commands/GeneralCommands/EchoCommand.h"
+#include "Commands/GeneralCommands/CommandCommand.h"
+#include "Commands/StringCommands/SetCommand.h"
+#include "Commands/StringCommands/GetCommand.h"
+#include "Commands/StringCommands/DelCommand.h"
+#include "Commands/StringCommands/ExpireCommand.h"
+#include "Commands/StringCommands/TtlCommand.h"
+#include "Commands/StringCommands/SetexCommand.h"
 
 #include "Respserializer.h"
 

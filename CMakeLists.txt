@@ -14,13 +14,13 @@ add_executable(MiniRedis
     src/Respserializer.cpp
     src/CommandDispatcher.cpp
     src/Store.cpp
-    src/Commands/CommandCommand.cpp
-    src/Commands/EchoCommand.cpp
-    src/Commands/PingCommand.cpp
-    src/Commands/SetCommand.cpp
-    src/Commands/GetCommand.cpp
-    src/Commands/DelCommand.cpp
-    src/Commands/ExpireCommand.cpp
-    src/Commands/TtlCommand.cpp
-    src/Commands/SetexCommand.cpp
+    src/Commands/GeneralCommands/EchoCommand.cpp
+    src/Commands/GeneralCommands/PingCommand.cpp
+    src/Commands/GeneralCommands/CommandCommand.cpp
+    src/Commands/StringCommands/SetCommand.cpp
+    src/Commands/StringCommands/GetCommand.cpp
+    src/Commands/StringCommands/DelCommand.cpp
+    src/Commands/StringCommands/ExpireCommand.cpp
+    src/Commands/StringCommands/TtlCommand.cpp
+    src/Commands/StringCommands/SetexCommand.cpp
 )
