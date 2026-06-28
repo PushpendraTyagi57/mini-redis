@@ -41,6 +41,12 @@ public:
 
     std::vector<std::string> lrange(const std::string& key, ssize_t start, ssize_t stop) const;
 
+    //-- Hash operations
+    bool hset(const std::string& key, const std::string& field, const std::string& value);
+    std::optional<std::string> hget(const std::string& key, const std::string& field) const;
+    std::unordered_map<std::string, std::string> hgetall(const std::string& key) const;
+    bool hdel(const std::string& key, const std::string& field);
+
 private:
     std::unordered_map<std::string, std::string> stringStore;
 

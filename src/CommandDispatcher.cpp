@@ -15,6 +15,10 @@
 #include "Commands/ListCommands/RPopCommand.h"
 #include "Commands/ListCommands/LLenCommand.h"
 #include "Commands/ListCommands/LRangeCommand.h"
+#include "Commands/HashCommands/HSetCommand.h"
+#include "Commands/HashCommands/HGetCommand.h"
+#include "Commands/HashCommands/HDelCommand.h"
+#include "Commands/HashCommands/HGetAllCommand.h"
 
 #include "Respserializer.h"
 
@@ -43,6 +47,12 @@ CommandDispatcher::CommandDispatcher(Store& store)
     handlers["RPOP"] = std::make_unique<RPopCommand>(store);
     handlers["LLEN"] = std::make_unique<LLenCommand>(store);
     handlers["LRANGE"] = std::make_unique<LRangeCommand>(store);
+
+    // Hash commands
+    handlers["HSET"] = std::make_unique<HSetCommand>(store);
+    handlers["HGET"] = std::make_unique<HGetCommand>(store);
+    handlers["HDEL"] = std::make_unique<HDelCommand>(store);
+    handlers["HGETALL"] = std::make_unique<HGetAllCommand>(store);
 }
 
 std::string CommandDispatcher::dispatch(const std::vector<std::string>& command)

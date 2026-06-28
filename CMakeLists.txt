@@ -29,4 +29,8 @@ add_executable(MiniRedis
     src/Commands/ListCommands/RPopCommand.cpp
     src/Commands/ListCommands/LLenCommand.cpp
     src/Commands/ListCommands/LRangeCommand.cpp
+    src/Commands/HashCommands/HSetCommand.cpp
+    src/Commands/HashCommands/HGetCommand.cpp
+    src/Commands/HashCommands/HGetAllCommand.cpp
+    src/Commands/HashCommands/HDelCommand.cpp
 )
