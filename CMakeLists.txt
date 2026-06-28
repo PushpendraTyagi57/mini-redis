@@ -33,4 +33,8 @@ add_executable(MiniRedis
     src/Commands/HashCommands/HGetCommand.cpp
     src/Commands/HashCommands/HGetAllCommand.cpp
     src/Commands/HashCommands/HDelCommand.cpp
+    src/Commands/SetCommands/SAddCommand.cpp
+    src/Commands/SetCommands/SRemCommand.cpp
+    src/Commands/SetCommands/SMembersCommand.cpp
+    src/Commands/SetCommands/SIsMemberCommand.cpp
 )

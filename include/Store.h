@@ -47,6 +47,12 @@ public:
     std::unordered_map<std::string, std::string> hgetall(const std::string& key) const;
     bool hdel(const std::string& key, const std::string& field);
 
+    //-- Set operations
+    bool sadd(const std::string& key, const std::string& member);
+    bool srem(const std::string& key, const std::string& member);
+    bool sismember(const std::string& key, const std::string& member);
+    std::unordered_set<std::string> smembers(const std::string& key) const;
+
 private:
     std::unordered_map<std::string, std::string> stringStore;
 

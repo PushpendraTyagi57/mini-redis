@@ -19,6 +19,10 @@
 #include "Commands/HashCommands/HGetCommand.h"
 #include "Commands/HashCommands/HDelCommand.h"
 #include "Commands/HashCommands/HGetAllCommand.h"
+#include "Commands/SetCommands/SAddCommand.h"
+#include "Commands/SetCommands/SRemCommand.h"
+#include "Commands/SetCommands/SMembersCommand.h"
+#include "Commands/SetCommands/SIsMemberCommand.h"
 
 #include "Respserializer.h"
 
@@ -53,6 +57,12 @@ CommandDispatcher::CommandDispatcher(Store& store)
     handlers["HGET"] = std::make_unique<HGetCommand>(store);
     handlers["HDEL"] = std::make_unique<HDelCommand>(store);
     handlers["HGETALL"] = std::make_unique<HGetAllCommand>(store);
+
+    // Set commands
+    handlers["SADD"] = std::make_unique<SAddCommand>(store);
+    handlers["SREM"] = std::make_unique<SRemCommand>(store);
+    handlers["SMEMBERS"] = std::make_unique<SMembersCommand>(store);
+    handlers["SISMEMBER"] = std::make_unique<SIsMemberCommand>(store);
 }
 
 std::string CommandDispatcher::dispatch(const std::vector<std::string>& command)
