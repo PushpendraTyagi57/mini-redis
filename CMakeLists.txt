@@ -5,7 +5,10 @@ project(MiniRedis)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(include)
+include_directories(
+    include
+    src
+)
 
 add_executable(MiniRedis
     src/main.cpp
@@ -13,7 +16,12 @@ add_executable(MiniRedis
     src/Respparser.cpp
     src/Respserializer.cpp
     src/CommandDispatcher.cpp
-    src/Store.cpp
+    src/Store/Store.cpp
+    src/Store/StringStore.cpp
+    src/Store/ListStore.cpp
+    src/Store/HashStore.cpp
+    src/Store/SetStore.cpp
+    src/Store/SortedSetStore.cpp
     src/Commands/GeneralCommands/EchoCommand.cpp
     src/Commands/GeneralCommands/PingCommand.cpp
     src/Commands/GeneralCommands/CommandCommand.cpp
@@ -37,4 +45,15 @@ add_executable(MiniRedis
     src/Commands/SetCommands/SRemCommand.cpp
     src/Commands/SetCommands/SMembersCommand.cpp
     src/Commands/SetCommands/SIsMemberCommand.cpp
+    src/Commands/SortedSetCommands/ZAddCommand.cpp
+    src/Commands/SortedSetCommands/ZRangeCommand.cpp
+    src/Commands/SortedSetCommands/ZRevRangeCommand.cpp
+    src/Commands/SortedSetCommands/ZIncrbyCommand.cpp
+    src/Commands/SortedSetCommands/ZRemCommand.cpp
+    src/Commands/SortedSetCommands/ZScoreCommand.cpp
+    src/Commands/SortedSetCommands/ZCardCommand.cpp
+    src/Commands/SortedSetCommands/ZRankCommand.cpp
+    src/Commands/SortedSetCommands/ZRevRankCommand.cpp
+    src/Commands/SortedSetCommands/ZRangeByScoreCommand.cpp
+    src/Commands/SortedSetCommands/ZCountCommand.cpp
 )

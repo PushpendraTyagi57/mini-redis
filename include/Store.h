@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <limits>
 
 constexpr int MAX_LEVEL = 16;
 
@@ -16,10 +17,11 @@ struct SkipNode
     double score;
 
     std::vector<SkipNode*> forward;
+    std::vector<int> span;
     SkipNode* backward;
 
     SkipNode(int level, const std::string& member, double score)
-        : member(member), score(score), forward(level, nullptr), backward(nullptr) {}
+        : member(member), score(score), forward(level, nullptr), span(level, 0), backward(nullptr) {}
 };
 
 struct SkipList
