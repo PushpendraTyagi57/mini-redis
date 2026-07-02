@@ -1,15 +1,17 @@
 #include "Respparser.h"
 
-#include <stdexcept>
-
-std::vector<std::string> RespParser::parse(const std::string& request)
+std::vector<std::string> RespParser::parse(const std::string& request, size_t& pos)
 {
-    size_t pos = 0;
-    if (request.empty() || request[pos] != '*')
+    if (pos >= request.size())
+    {
+        throw IncompleteRequest();
+    }
+
+    if (request[pos] != '*')
     {
         throw std::runtime_error("Expected RESP array");
     }
-    
+
     pos++;
 
     int numberOfElements = readInteger(request, pos);
@@ -29,8 +31,18 @@ int RespParser::readInteger(const std::string& request, size_t& pos)
 {
     int value = 0;
 
-    while (pos < request.size() && request[pos] != '\r')
+    while (true)
     {
+        if (pos >= request.size())
+        {
+            throw IncompleteRequest();
+        }
+
+        if (request[pos] == '\r')
+        {
+            break;
+        }
+
         if (!std::isdigit(request[pos]))
         {
             throw std::runtime_error("Invalid Integer");
@@ -41,13 +53,17 @@ int RespParser::readInteger(const std::string& request, size_t& pos)
     }
 
     expectCRLF(request, pos);
-
     return value;
 }
 
 std::string RespParser::readBulkString(const std::string& request, size_t& pos)
 {
-    if (pos >= request.size() || request[pos] != '$')
+    if (pos >= request.size())
+    {
+        throw IncompleteRequest();
+    }
+
+    if (request[pos] != '$')
     {
         throw std::runtime_error("Expected bulk string");
     }
@@ -56,17 +72,15 @@ std::string RespParser::readBulkString(const std::string& request, size_t& pos)
 
     int length = readInteger(request, pos);
 
-    if (pos + length > request.size())
+    if (pos + length + 2 > request.size())
     {
-        throw std::runtime_error("Bulk string too short");
+        throw IncompleteRequest();
     }
 
     std::string value = request.substr(pos, length);
-
     pos += length;
 
     expectCRLF(request, pos);
-
     return value;
 }
 
@@ -74,7 +88,7 @@ void RespParser::expectCRLF(const std::string& request, size_t& pos)
 {
     if (pos + 1 >= request.size())
     {
-        throw std::runtime_error("Unexpected end of request");
+        throw IncompleteRequest();
     }
 
     if (request[pos] != '\r' || request[pos + 1] != '\n')
